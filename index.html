@@ -16,8 +16,117 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+						Интегральное исчисление
+						=======================
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						Определение первообразной
+						-------------------------
+
+						Функция $F(x)$ называется первообразной
+						для функции $f(x)$ на данном промежутке, если
+						для любого $x$ из данного промежутка $F'(x) = f(x)$
+
+						Интегрирование функци $f(x)$ - это математическая
+						операция по нахождению первообразной $f(x)$
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						Свойства первообразной
+						-------------------------
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						Неопределённый интеграл
+						-------------------------
+					</script>
+				</section>
+				
+				<section id="integral-table">
+					<h2>Таблица интегралов</h2>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						Определённый интеграл
+						-------------------------
+					</script>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						Свойства определённого интеграла
+						-------------------------
+					</script>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						Формула Ньютона-Лейбница
+						-------------------------
+					</script>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						Способы вычисления интегралов
+						-------------------------
+					</script>
+				</section>
+				
+				<section>
+					<h2>Нахождение интеграла</h2>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						Интерполирование функции
+						-------------------------
+					</script>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						Интерполяционный многочлен Лагранжа
+						-------------------------
+					</script>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						Геометрический смысл определённого интеграла
+						-------------------------
+					</script>
+				</section>
+				
+				<section>
+					<h2>Нахождение площади криволинейной трапеции</h2>
+				</section>
+				
+				<section>
+					<h2>Игра 1. Угадай площадь</h2>
+				</section>
+				
+				<section>
+					<h2>Игра 2. Найди котиков</h2>
+				</section>
+				
+				<section>
+					<h2>Игра 1. Найди интегралы</h2>
+				</section>
+				
+				
 			</div>
 		</div>
 
@@ -31,7 +140,27 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
-
+				center: false,
+				slideNumber: true,
+				math: {
+					notificationsEnabled: true,
+				},
+				dependencies: [
+					{
+						src: 'plugin/math-katex/math-katex.js', 
+						async: true,
+						callback: () => {
+							// // solve problem with katex 
+							// let section = document.querySelectorAll('section script');
+							// 	section.forEach( (item, i) => {
+							// 		section[i].innerHTML = section[i].innerHTML
+							// 			.replace(/\\/g,'\\\\')
+							// 			.replace(/_/g,'\\_')
+							// 			.replace(/\{/g,'\\\{')
+							// 			.replace(/\}/g,'\\\}');
+							// });
+						},
+					}],
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
