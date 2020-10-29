@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/theme/league.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
@@ -18,38 +18,79 @@
 			<div class="slides">
 
 
-				<section data-markdown>
+				<section class="center" data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Интегральное исчисление
 						=======================
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Определение первообразной
 						-------------------------
 
 						Функция $F(x)$ называется первообразной
 						для функции $f(x)$ на данном промежутке, если
-						для любого $x$ из данного промежутка $F'(x) = f(x)$
+						для любого $x$ из данного промежутка 
+						$F'(x) = f(x)$
 
-						Интегрирование функци $f(x)$ - это математическая
+						Интегрирование функции $f(x)$ - это математическая
 						операция по нахождению первообразной $f(x)$
+						
+						Notes: Функция эф от икс называется первообразной
+						для функци эф от икс на данном промежутке, если
+						для любого икс из данного промежутка Эф большое
+						от икс равно эф малое от икс
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Примеры
+						-------------------------
+
+						$F(x) = 5x^3$ - это первобразная для 
+						$f(x) = 15x^2$, т.к. $F'(x) = (5x^3)' =
+						5 \cdot3x^2 = 15x^2$
+					</script>
+				</section>
+
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Свойства первообразной
 						-------------------------
+						- Если к первообразной $F(x)$ функции $f(x)$
+						добавить постоянную $C$, то полученная Функция
+						$F(x)+C$ также является первобразной для функции
+						$f(x)$
+
+						- Первообразная суммы равна сумме первообразных
+
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Неопределённый интеграл
 						-------------------------
+
+						Неопределённый интеграл от функции $f(x)$ 
+						называется выражение $F(x)+C$, то есть 
+						совокупность всех первообразных функции $f(x)$
+					</script>
+				</section>
+
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Неопределённый интеграл
+						-------------------------
+						Обозначается $\int f(x)dx = F(x)+C$, где
+						- $f(x)$ - подытегральная функция
+						- $f(x)dx$ - подынтегральное выражение
+						- $x$ - переменная интегрирования
+						- $F(x)$ - одна из первообразных функции $f(x)$
+						- $C$ - постоянная
 					</script>
 				</section>
 				
@@ -57,73 +98,330 @@
 					<h2>Таблица интегралов</h2>
 				</section>
 				
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Определённый интеграл
 						-------------------------
+
+						1. Разобъем промежуток точками 
+						$x_0 = a, x_1, x_2, x_3, \cdots, x_k, x_{k+1}, \cdots, x_n=b$
+						Введем следующее обозначение: $\Delta x_k = x_{k+1}-x_k$ - длина 
+						участка разбиения.
+						$\lambda = \sup \{ \Delta x_k \}$ - диаметр разбиения (наибольший
+						из всех длин участков разбиения)
 					</script>
 				</section>
 				
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Определённый интеграл
+						-------------------------
+
+						2. На каждом частичном участке $\[x_k; x_{k+1}\]$
+						возьмем произвольную точку $\xi_k$ и вычислим в ней
+						значение $f(\xi_k)$
+						3. Составим произведение $f(\xi_k) \cdot \Delta x_k$
+						4. Составим сумму $$\sigma_n = \sum_{k=0}^{n-1} f(\xi_k) 
+						\cdot \Delta x_k$$
+
+					</script>
+				</section>
+				
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Определённый интеграл
+						-------------------------
+
+						5. Измельчая дробление (за счет увеличения числа точек
+						дробления $n$) и устремляя при этом диаметр разбиения к
+						нулю ($\lambda \rightarrow 0$), найдем предел последовательности
+						итегральных сумм $$
+						J = \lim_{n \rightarrow \infty, \lambda \rightarrow 0}\sigma_n
+						$$
+
+					</script>
+				</section>
+
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Определённый интеграл
+						-------------------------
+
+						Если предел $J$ существует, не зависит от способа
+						дробления и выбора точек $\xi_k$, то он называется
+						определённым интегралом от функции $f(x)$ по 
+						промежутку \[a, b\] и обозначается 
+						$$
+						J = \int_a^b f(x)dx,
+						$$ где $a$ и $b$ называются нижним и верхним
+						пределами интегрирования.
+
+					</script>
+				</section>
+
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Определённый интеграл
+						-------------------------
+
+						Более компактное определение определенного интеграла
+						записывается, как
+						$$
+							J = \lim_{n \rightarrow \infty, \lambda \rightarrow 0}
+							\sum_{k=0}^{n-1} f(\xi_k) \cdot \Delta x_k
+						$$
+
+					</script>
+				</section>
+				
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Свойства определённого интеграла
 						-------------------------
+
+						- $$
+							\int_a^b Af(x)dx = A\int_a^b f(x)dx 
+						$$
+						- $$
+							\int_a^b (f_1(x)+f_2(x))dx = $$
+						$$	= \int_a^b f_1(x)dx + \int_a^b f_2(x)dx
+						$$
 					</script>
 				</section>
 				
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Свойства определённого интеграла
+						-------------------------
+
+						- $$
+							\int_a^b f(x)dx = 
+							\int_a^c f(x)dx +
+							\int_c^b f(x)dx,
+						$$ для любых чисел $ a < c < b$
+					</script>
+				</section>
+				
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Формула Ньютона-Лейбница
 						-------------------------
+						Пусть есть непрерывная функция $f(x)$
+						на отрезке $[a,b]$, а $F(x)$ её первообразная,
+						тогда имеем равенство:
+						$$
+							\int_a^bf(x)dx = F(b) - F(a)
+						$$
+					</script>
+				</section>
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Формула Ньютона-Лейбница
+						-------------------------
+						$$
+							\int_1^2x^2dx = \dfrac{2^3}{3} - \dfrac{1^3}{3} =
+							\dfrac{8}{3} - \dfrac{1}{3} = \dfrac{7}{3}
+						$$
 					</script>
 				</section>
 				
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Способы вычисления интегралов
 						-------------------------
+
+						- Интегрирование элементарных функций (табличных)
+						- Интегрирование по частям
+						$$
+							\int u \cdot dv = uv - \int v \cdot du
+						$$
 					</script>
 				</section>
 				
-				<section>
-					<h2>Нахождение интеграла</h2>
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Способы вычисления интегралов
+						-------------------------
+						- Замена переменной
+
+						$\int F(x)dx$. Пусть $x = \phi(t)$, 
+							$\phi(t)$ - имеет непрерывную 
+							производную. Тогда $dx = \phi(t)'dt$ и
+						$ \int F(x)dx = \int F(\phi(t)) \cdot
+						\phi'(t)dt$
+					</script>
 				</section>
 				
-				<section data-markdown>
+				<section id="evaluateIntegral">
+					<h2>Нахождение интеграла</h2>
+
+					$$\int$$
+
+					<input type="text" id="_function">
+					<input type="text" id="_a">
+					<input type="text" id="_b">
+
+				
+
+					<output id="_result">
+
+					</output>
+				</section>
+				
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Интерполирование функции
 						-------------------------
+
+						Интерполирование - способ нахождения промежуточных
+						значений величины по имеющемуся дискретному набору
+						известных значений.
+
+						Апроксимация функции - замена одной функции другой,
+						более простой, значения которой приближены или равны
+						изначальной.
 					</script>
 				</section>
 				
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Интерполяционный многочлен Лагранжа
 						-------------------------
+
+						$$ 
+							L(x) = \sum_{i=0}^{n} y_il_i(x),
+						$$ где
+						$$
+							l_i(x) = \prod_{j=0, j \ne i}^{n} 
+							\dfrac{x-x_j}{x_i-x_j}
+						$$
 					</script>
 				</section>
 				
-				<section data-markdown>
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="text/template">
+						Интерполяционный многочлен Лагранжа
+						-------------------------
+
+						$$
+							l_0 = \dfrac{x-x_1}{x_0-x_1} \cdot
+								  \dfrac{x-x_2}{x_0-x_2} \cdot
+								  \dfrac{x-x_3}{x_0-x_3}
+						$$
+						$$
+							l_1 = \dfrac{x-x_0}{x_1-x_1} \cdot
+								  \dfrac{x-x_2}{x_1-x_2} \cdot
+								  \dfrac{x-x_3}{x_1-x_3}
+						$$
+						$$
+							l_2 = \dfrac{x-x_0}{x_2-x_1} \cdot
+								  \dfrac{x-x_1}{x_2-x_2} \cdot
+								  \dfrac{x-x_3}{x_2-x_3}
+						$$
+						$$
+							l_3 = \dfrac{x-x_0}{x_3-x_1} \cdot
+								  \dfrac{x-x_1}{x_3-x_2} \cdot
+								  \dfrac{x-x_2}{x_3-x_3}
+						$$
+					</script>
+				</section>
+				
+				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Геометрический смысл определённого интеграла
 						-------------------------
+
+						Геометрический смысл - это площадь
+						криволинейной трапеции для неотрицательной
+						и непрерывной функции, котрая расположена 
+						в интервале между двумя прямыми.
+
 					</script>
 				</section>
 				
 				<section>
 					<h2>Нахождение площади криволинейной трапеции</h2>
+					<label for="function">$f(x)$</label>
+					<input type="text" id="function">
+					<label for="a">$a$</label>
+					<input type="text" id="a">
+					<label for="b">$b$</label>
+					<input type="text" id="b">
+					<output id="result">
+
+					</output>
 				</section>
 				
 				<section>
 					<h2>Игра 1. Угадай площадь</h2>
+					<div id="game1"></div>
+					<label for="gameInput1">Ваш ответ:</label>
+					<input type="text" id="gameInput1">
+					<output id="gameOutput1"></output>
 				</section>
 				
 				<section>
 					<h2>Игра 2. Найди котиков</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
 				</section>
 				
 				<section>
 					<h2>Игра 1. Найди интегралы</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
 				</section>
 				
 				
