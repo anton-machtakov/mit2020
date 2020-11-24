@@ -33,10 +33,10 @@
 						Функция $F(x)$ называется первообразной
 						для функции $f(x)$ на данном промежутке, если
 						для любого $x$ из данного промежутка 
-						$F'(x) = f(x)$
+						$F'(x) = f(x)$.
 
 						Интегрирование функции $f(x)$ - это математическая
-						операция по нахождению первообразной $f(x)$
+						операция по нахождению первообразной $f(x)$.
 						
 						Notes: Функция эф от икс называется первообразной
 						для функци эф от икс на данном промежутке, если
@@ -53,6 +53,11 @@
 						$F(x) = 5x^3$ - это первобразная для 
 						$f(x) = 15x^2$, т.к. $F'(x) = (5x^3)' =
 						5 \cdot3x^2 = 15x^2$
+
+						$F(x) = e^x$ - это первобразная для 
+						$f(x) = e^x$, т.к. $F'(x) = (e^x)' =
+						e^x$
+
 					</script>
 				</section>
 
@@ -95,7 +100,6 @@
 				</section>
 				
 				<section id="integral-table">
-					<h2>Таблица интегралов</h2>
 				</section>
 				
 				<section data-markdown data-markdown-separator="^Notes:">
@@ -362,7 +366,7 @@
 				
 				<section>
 					<h2>Игра 2. Найди котиков</h2>
-					<table>
+					<table id="findCats">
 						<tbody>
 							<tr>
 								<td></td>
@@ -393,8 +397,8 @@
 				</section>
 				
 				<section>
-					<h2>Игра 1. Найди интегралы</h2>
-					<table>
+					<h2>Игра 3. Найди интегралы</h2>
+					<table id="findIntegrals">
 						<tbody>
 							<tr>
 								<td></td>
@@ -423,11 +427,11 @@
 						</tbody>
 					</table>
 				</section>
-				
-				
 			</div>
 		</div>
 
+		<script src="plugin/underscore/underscore-min.js"></script>
+		<script src="plugin/algebrite/algebrite.bundle-for-browser.js"></script>
 		<script src="dist/reveal.js"></script>
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
