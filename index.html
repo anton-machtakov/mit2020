@@ -100,6 +100,9 @@
 				</section>
 				
 				<section id="integral-table">
+					<aside class="notes">
+						Таблица интегралов
+					</aside>
 				</section>
 				
 				<section data-markdown data-markdown-separator="^Notes:">
@@ -394,6 +397,23 @@
 							</tr>
 						</tbody>
 					</table>
+					<output id="winner2" style="display:none"></output>
+					<button id="startGame2">Начать игру</button>
+					<table id="scoreboard2" style="display:none">
+						<tr>
+							<td>
+								<span>Игрок 1</span>
+								<span id="score20">0</span> очков
+							</td>
+							<td id="who2">
+								1
+							</td>
+							<td>
+								<span>Игрок 2</span>
+								<span id="score21">0</span> очков
+							</td>
+						</tr>
+					</table>
 				</section>
 				
 				<section>
@@ -426,6 +446,23 @@
 							</tr>
 						</tbody>
 					</table>
+					<output id="winner3" style="display:none"></output>
+					<button id="startGame3">Начать игру</button>
+					<table id="scoreboard3" style="display:none">
+						<tr>
+							<td>
+								<span>Игрок 1</span>
+								<span id="score30">0</span> очков
+							</td>
+							<td id="who3">
+								1
+							</td>
+							<td>
+								<span>Игрок 2</span>
+								<span id="score31">0</span> очков
+							</td>
+						</tr>
+					</table>
 				</section>
 			</div>
 		</div>
@@ -436,6 +473,88 @@
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+
+		<script>
+			window.onload = () => {
+				let integralList = [
+					'0',
+					'1',
+					'x^n',
+					'a^x',
+					'1/x^2',
+					'1/sqrt(x)',
+					'1/x',
+					'e^x',
+					'sin(x)',
+					'cos(x)',
+					'tan(x)',
+					'1/cos(x)^2',
+					'1/sin(x)^2'
+				];
+
+				for (let i in integralList) {
+					integralList[i] = [
+						'\\int ' + Algebrite.run(`printlatex(${integralList[i]})`)+' dx',
+						Algebrite.integral(integralList[i]).toLatexString()
+					];
+				}
+				
+				const integralTable = (func) => {
+					let note = document.querySelector('#integral-table .notes').innerHTML;
+					let slide;
+					for (let i in func) {
+						if (i%7 === 0) {
+							slide = document.createElement('section');
+							if (i == 0) {
+								slide.className = 'present';
+							} else {
+								slide.classList = 'future';
+							}
+							slide.innerHTML = '<h3>Таблица интегралов</h3>';
+						}
+						slide.innerHTML += '<p>'+katex.renderToString(func[i][0])+' = '+
+							katex.renderToString(func[i][1])+'+C</p>';
+						if (i%7 === 6 || func.length - i === 1) {
+							slide.innerHTML += `<aside class="notes">${note}</aside>`;
+							document.querySelector('#integral-table').appendChild(slide);
+						}
+					}
+				}
+				integralTable(integralList);
+
+				let findCatsName = [
+					'1.png',
+					'1.png',
+					'2.png',
+					'2.png',
+					'3.png',
+					'4.png',
+					'4.png',
+					'5.png',
+					'5.png',
+					'6.png',
+					'6.png',
+					'7.png',
+					'7.png',
+					'8.png',
+					'8.png',
+				];
+				let score = [0,0];
+				let who = 0;
+				let start = false;
+				let lastValue = undefined;
+
+				let tds = document.querySelectorAll('#findCats td');
+				let i = 0;
+				for (let td of tds) {
+					td.innerHTML = `<img data-active="0" data-id="${i++}"
+						width="80px" height="60px" data-cats="" 
+						src="img/0.jpg">`;
+				}
+			}
+
+		</script>
+
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
