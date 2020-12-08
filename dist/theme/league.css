@@ -296,23 +296,54 @@
       height: 100px;
       width: 400px;
       left: 273px;
+      font-size: 60px;
     }
-    #_a {
+    #_b {
       position: absolute;
       top: 133px;
       width: 50px;
       left: 221px;
       height: 50px;
+      font-size: 30px;
     }
-    #_b {
+    #_a {
       position: absolute;
       top: 321px;
       width: 50px;
       left: 175px;
       height: 50px;
+      font-size: 30px;
     }
-    #evaluateIntegral .formula {
+    #_d {
+      position: absolute;
+      top: 232px;
+      width: 50px;
+      left: 740px;
+      height: 50px;
+      font-size: 30px;
+    }
+    #evaluateIntegral .formula.display {
       position: absolute;
       left: 200px;
       top: 200px;
+    }
+    #evaluateIntegral .formula.inline {
+      position: absolute;
+      left: 680px;
+      top: 230px;
+    }
+    #_getResult {
+      position: absolute;
+      top: 321px;
+      width: 524px;
+      left: 273px;
+      height: 50px;
+      font-size: 30px;
+    }
+    #_result {
+      top: 389px;
+      position: absolute;
+      margin-left: -50%;
+      text-align: center;
+      width: 100%;
     }
