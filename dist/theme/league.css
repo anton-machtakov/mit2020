@@ -347,3 +347,7 @@
       text-align: center;
       width: 100%;
     }
+
+    #findCats td {
+      cursor: pointer;
+    }

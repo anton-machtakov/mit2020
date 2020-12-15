@@ -367,7 +367,7 @@
 						<div id="plotGame" style="height:400px"></div>
 						<label for="inputGame">Ваш ответ:</label>
 						<input type="text" id="inputGame">
-						<input type="text" id="check" value="Проверить результат">
+						<input type="button" id="check" value="Проверить результат">
 						<output id="_resultGame"></output>
 					</div>
 				</section>
@@ -483,6 +483,7 @@
 		<script src="plugin/highlight/highlight.js"></script>
 
 		<script>
+			let resultGame;
 			window.onload = () => {
 
 				//Нахождение интеграла
@@ -544,6 +545,46 @@
 					return result.innerHTML = Algebrite.defint(func, 'x', b, a);
 				}
 
+				//Игра 1
+				document.querySelector('#getResultGame').onclick = () => {
+					let a = document.querySelector('#aGame').value;
+					let b = document.querySelector('#bGame').value;
+					let func = document.querySelector('#funcGame').value;
+					let result = document.querySelector('#_resultGame');
+					if (func === '') {
+						return result.innerHTML = 'Вы не ввели функцию';
+					}
+					if (a === '' && b !== '') {
+						return result.innerHTML = 'Вы не ввели левую границу';
+					}
+					if (a !== '' && b === '') {
+						return result.innerHTML = 'Вы не ввели правую границу';
+					}
+					if (a > b) {
+						return result.innerHTML = 'Вы перепутали границы';
+					}
+					plot(
+						'plotGame',
+						func,
+						a,
+						b
+					);
+					resultGame = Algebrite.defint(func, 'x', a, b);
+				}
+				document.querySelector('#check').onclick = () => {
+					let check = 
+						Algebrite.abs(
+							Algebrite.run(
+								`${document.querySelector("#inputGame").value}-${resultGame.toString()}`
+							)
+						).toString();
+					if (check == 0) {
+						return document.querySelector('#_resultGame').innerHTML = 'Вы угадали';
+					}
+					return document.querySelector('#_resultGame').innerHTML = 'Вы ошиблись на ' +  check;
+				}
+
+				//Построение графика
 				const plot = (place, expr, a, b) => {
 					const exprCompile = math.compile(expr);
 					const aCompile = math.compile(a);
@@ -577,7 +618,7 @@
 					Plotly.newPlot(place, [plot1, plot2, plot3]);
 				}
 
-
+				//Список интегралов
 				let integralList = [
 					'0',
 					'1',
@@ -601,6 +642,7 @@
 					];
 				}
 				
+				//Таблица интегралов
 				const integralTable = (func) => {
 					let note = document.querySelector('#integral-table .notes').innerHTML;
 					let slide;
@@ -624,6 +666,7 @@
 				}
 				integralTable(integralList);
 
+				//Матрица котов
 				let findCatsName = [
 					'1.png',
 					'1.png',
@@ -652,6 +695,74 @@
 					td.innerHTML = `<img data-active="0" data-id="${i++}"
 						width="80px" height="60px" data-cats="" 
 						src="img/0.jpg">`;
+					td.firstChild.onclick = e => {
+						if (!start){
+							return;
+						}
+						if (e.target.dataset.active === '1') {
+							return;
+						}
+						if (lastValue !== undefined) {
+							if (lastValue.dataset.cats === e.target.dataset.cats) {
+								score[who] += 1;
+								document.querySelector('#score2'+who).innerHTML = score[who];
+								lastValue = undefined;
+								if (score[0]+score[1] === 8) {
+									let winner = '';
+									if (score[0] > score[1]) {
+										winner = "Выйграл первый игрок";
+									} else if (score[0] < score[1]) {
+										winner = "Выйграл второй игрок"
+									} else {
+										winner = "Ничья";
+									}
+									document.querySelector('#winner2').innerHTML = winner;
+									document.querySelector('#winner2').style.display = "block";
+									document.querySelector('#scoreboard2').style.display = 'none';
+									document.querySelector('#startGame2').style.display = 'inline';
+									start = false;
+								}
+							} else {
+								who = who === 1 ? 0 : 1;
+								document.querySelector('#who2').innerHTML = who + 1;
+								setTimeout (
+									() => {
+										let dataId = document.querySelector(`[data-id="${e.target.dataset.id}"]`);
+										dataId.src = "img/0.jpg";
+										dataId.dataset.active = 0;
+										let dataId2 = document.querySelector(`[data-id="${lastValue.dataset.id}"]`);
+										dataId2.src = "img/0.jpg";
+										dataId2.dataset.active = 0;
+
+									}, 1000
+								);
+							}
+						} else {
+							lastValue = e.target;
+						}
+						document.querySelector(`[data-id="${e.target.dataset.id}"]`).src = 
+							'img/'+e.target.dataset.cats;
+						document.querySelector(`[data-id="${e.target.dataset.id}"]`)
+							.dataset.active = "1";
+						
+					}
+				}
+				document.querySelector("#startGame2").onclick = () => {
+					document.querySelector('#startGame2').style.display = 'none';
+					document.querySelector('#winner2').style.display = 'none';
+					document.querySelector('#scoreboard2').style.display = 'table';
+					start = true;
+					score = [0, 0];
+					document.querySelector('#score20').innerHTML = "0";
+					document.querySelector('#score21').innerHTML = "0";
+					findCatsName = _.shuffle(findCatsName);
+					for (let i in findCatsName) {
+						let dataId = document.querySelector(`[data-id="${i}"]`);
+						dataId.src= "img/0.jpg";
+						/// dataId.active = "0"; 
+						dataId.dataset.active = "0";
+						dataId.dataset.cats = findCatsName[i];
+					}
 				}
 			}
 
