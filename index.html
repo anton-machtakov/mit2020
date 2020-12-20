@@ -4,27 +4,38 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+		<!-- Заголовок презентации -->
 		<title>Интегральное исчисление</title>
+		<meta name="description" content="GIT">
+		<!-- Информация об авторе -->
+		<meta name="author" content="Мачтаков Антон">
+		<link rel="author" href="https://github.com/9pr"> 
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/league.css" id="theme">
-
-		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		
+		<!-- Тема презентации -->
+		<link rel="stylesheet" href="dist/theme/league.css" id="theme">
+		
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
 
-
+				<!-- Класс center используется для вертикальной центровки -->
+				<!-- data-markdown-separator="^Notes:" позволяет писать комментарии к слайду -->
+				<!-- data-markdown и <script type="text/template"> позволяет использовать markdown синтаксис -->
 				<section class="center" data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Интегральное исчисление
 						=======================
+
+						Notes: Заголовок презентации
 					</script>
 				</section>
 
+				<!-- Все формулы оборачиваем в $$. Тем самым отдаем их рендеру KaTeX -->
 				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Определение первообразной
@@ -65,13 +76,13 @@
 					<script type="text/template">
 						Свойства первообразной
 						-------------------------
+
 						- Если к первообразной $F(x)$ функции $f(x)$
 						добавить постоянную $C$, то полученная Функция
 						$F(x)+C$ также является первобразной для функции
 						$f(x)$
 
 						- Первообразная суммы равна сумме первообразных
-
 					</script>
 				</section>
 
@@ -90,6 +101,7 @@
 					<script type="text/template">
 						Неопределённый интеграл
 						-------------------------
+
 						Обозначается $\int f(x)dx = F(x)+C$, где
 						- $f(x)$ - подытегральная функция
 						- $f(x)dx$ - подынтегральное выражение
@@ -99,6 +111,8 @@
 					</script>
 				</section>
 				
+				<!-- Используем идентификатор для генерации таблицы -->
+				<!-- На этом слайде не используем markdown, потому что слайд будет генерироваться с помощью JS -->
 				<section id="integral-table">
 					<aside class="notes">
 						Таблица интегралов
@@ -130,7 +144,6 @@
 						3. Составим произведение $f(\xi_k) \cdot \Delta x_k$
 						4. Составим сумму $$\sigma_n = \sum_{k=0}^{n-1} f(\xi_k) 
 						\cdot \Delta x_k$$
-
 					</script>
 				</section>
 				
@@ -145,7 +158,6 @@
 						итегральных сумм $$
 						J = \lim_{n \rightarrow \infty, \lambda \rightarrow 0}\sigma_n
 						$$
-
 					</script>
 				</section>
 
@@ -162,7 +174,6 @@
 						J = \int_a^b f(x)dx,
 						$$ где $a$ и $b$ называются нижним и верхним
 						пределами интегрирования.
-
 					</script>
 				</section>
 
@@ -177,7 +188,6 @@
 							J = \lim_{n \rightarrow \infty, \lambda \rightarrow 0}
 							\sum_{k=0}^{n-1} f(\xi_k) \cdot \Delta x_k
 						$$
-
 					</script>
 				</section>
 				
@@ -213,6 +223,7 @@
 					<script type="text/template">
 						Формула Ньютона-Лейбница
 						-------------------------
+
 						Пусть есть непрерывная функция $f(x)$
 						на отрезке $[a,b]$, а $F(x)$ её первообразная,
 						тогда имеем равенство:
@@ -221,10 +232,12 @@
 						$$
 					</script>
 				</section>
+
 				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
 						Формула Ньютона-Лейбница
 						-------------------------
+
 						$$
 							\int_1^2x^2dx = \dfrac{2^3}{3} - \dfrac{1^3}{3} =
 							\dfrac{8}{3} - \dfrac{1}{3} = \dfrac{7}{3}
@@ -249,6 +262,7 @@
 					<script type="text/template">
 						Способы вычисления интегралов
 						-------------------------
+
 						- Замена переменной
 
 						$\int F(x)dx$. Пусть $x = \phi(t)$, 
@@ -259,14 +273,21 @@
 					</script>
 				</section>
 				
+				<!-- Слайд с программой. Формулы делаем и блочные и строчные 
+					для корректной обработки с помощью css -->
+				<!-- Описываем отдельно стили  -->
 				<section id="evaluateIntegral">
 					<h2>Нахождение интеграла</h2>
 					$$\int$$
+					<!-- Функция и пределы интегрирования -->
 					<input type="text" id="_function">
 					<input type="text" id="_a">
 					<input type="text" id="_b">
+					<!-- Переменная интегрирования -->
 					$d$ <input type="text" id="_d">
+					<!-- Кнопка запуска программы -->
 					<input type="button" value="Посчитать" id="_getResult">
+					<!-- Вывод результата -->
 					<output id="_result"></output>
 				</section>
 				
@@ -343,37 +364,61 @@
 				
 				<section>
 					<h2>Нахождение площади криволинейной трапеции</h2>
+					<!-- Функция и границы трапеции -->
 					<label for="func">$f(x)$</label>
 					<input type="text" id="func">
 					<label for="a">$a$</label>
 					<input type="text" id="a">
 					<label for="b">$b$</label>
 					<input type="text" id="b">
+					<!-- Кнопка запуска программы -->
 					<input type="button" value="Посчитать площадь" id="getResult">
+					<!-- Вывод результата -->
 					<output id="result"></output>
+					<!-- График трапеции -->
 					<div style="height: 400px" id="plot"></div>
 				</section>
 				
+				<!-- Правила игры:
+					Строим криволинейную трапецию по начальным условиям
+					Смотрим получившийся график
+					Пытаемся угадать площадь фигуры, написав значение
+					Получаем отклонение или результат, что мы угдали
+				-->
 				<section>
 					<h2>Игра 1. Угадай площадь</h2>
 					<div id="game1">
+						<!-- Функция и границы трапеции -->
 						<label for="funcGame">$f(x)$</label>
 						<input type="text"  id="funcGame">
 						<label for="aGame">$a$</label>
 						<input type="text"  id="aGame">
 						<label for="bGame">$b$</label>
 						<input type="text"  id="bGame">
+						<!-- Кнопка построения трапеции -->
 						<input type="button" id="getResultGame" value="Показать график">
+						<!-- График трапеции -->
 						<div id="plotGame" style="height:400px"></div>
+						<!-- Форма ввода Вашего значения -->
 						<label for="inputGame">Ваш ответ:</label>
 						<input type="text" id="inputGame">
+						<!-- Кнопка старта сравнения -->
 						<input type="button" id="check" value="Проверить результат">
+						<!-- Результат -->
 						<output id="_resultGame"></output>
 					</div>
 				</section>
 				
+				<!-- Правила игры
+					Играют 2 игрока по очереди
+					Каждый переворачивает 2 карты с котиками.
+					Если они одинаковые, то игрок получает очко и делает следующий ход
+					Если они разные, то ход переходит к другому игроку
+					После открытия всех карт следующий раунд начинает победивший игрок	
+				-->
 				<section>
 					<h2>Игра 2. Найди котиков</h2>
+					<!-- Игровое поле 4х4-->
 					<table id="findCats">
 						<tbody>
 							<tr>
@@ -402,8 +447,11 @@
 							</tr>
 						</tbody>
 					</table>
+					<!-- Поле вывода победителя -->
 					<output id="winner2" style="display:none"></output>
+					<!-- Кнопка для старта игры -->
 					<button id="startGame2">Начать игру</button>
+					<!-- Игровая таблица -->
 					<table id="scoreboard2" style="display:none">
 						<tr>
 							<td>
@@ -423,6 +471,7 @@
 				
 				<section>
 					<h2>Игра 3. Найди интегралы</h2>
+					<!-- Игровое поле -->
 					<table id="findIntegrals">
 						<tbody>
 							<tr>
@@ -451,8 +500,11 @@
 							</tr>
 						</tbody>
 					</table>
+					<!-- Вывод результата -->
 					<output id="winner3" style="display:none"></output>
+					<!-- Кнопка начала игры -->
 					<button id="startGame3">Начать игру</button>
+					<!-- Игровая таблица -->
 					<table id="scoreboard3" style="display:none">
 						<tr>
 							<td>
@@ -471,28 +523,36 @@
 				</section>
 			</div>
 		</div>
-
-		<script src="plugin/underscore/underscore-min.js"></script>
+		
+		<!-- Библиотеки для математических рассчетов -->
 		<script src="plugin/algebrite/algebrite.bundle-for-browser.js"></script>
 		<script src="plugin/math.js/math.min.js"></script>
 		<script src="plugin/plotly/plotly.min.js"></script>
+		<script src="plugin/underscore/underscore-min.js"></script>
 		
+		<!-- Стандартный наьор подключения -->
 		<script src="dist/reveal.js"></script>
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
 
 		<script>
+			//Результат игры
 			let resultGame;
+
+			//Событие, чтобы скрипты начали выполняться только после загрузки
 			window.onload = () => {
 
 				//Нахождение интеграла
 				document.querySelector('#_getResult').onclick = () => {
+					//Забираем значение из поле ввода
 					let a = document.querySelector('#_a').value;
 					let b = document.querySelector('#_b').value;
 					let d = document.querySelector('#_d').value;
 					let func = document.querySelector('#_function').value;
+					//Ссылка на тег результата
 					let result = document.querySelector('#_result');
+					//Делаем проверки на пустые поля
 					if (func === '') {
 						return result.innerHTML = 'Вы не ввели функцию';
 					}
@@ -505,9 +565,11 @@
 					if (a !== '' && b === '') {
 						return result.innerHTML = 'Вы не ввели верхний предел интегрирования';
 					}
+					//Если есть пределы интегрирования, то считаем определенный интеграл
 					if (a !== '' && b !== '') {
 						return result.innerHTML = Algebrite.defint(func, d, b, a);
 					}
+					//В противном случае считает неопределенный интеграл, не забывая добавить константу
 					return result.innerHTML = katex.renderToString(
 						Algebrite.simplify(
 							Algebrite.integral(func, d) + '+ C'
@@ -517,10 +579,13 @@
 
 				//Нахождение площади трапеции
 				document.querySelector('#getResult').onclick = () => {
+					//Получаем значение из полей ввода
 					let a = document.querySelector('#a').value;
 					let b = document.querySelector('#b').value;
 					let func = document.querySelector('#func').value;
+					//Ссылка на тег вывода результата
 					let result = document.querySelector('#result');
+					//Проверка полей на пустоту
 					if (func === '') {
 						return result.innerHTML = 'Вы не ввели функцию';
 					}
@@ -536,21 +601,26 @@
 					if (a === b) {
 						return result.innerHTML = '0';
 					}
+					//Строим криволинейную трапецию на площади
 					plot(
 						'plot',
 						document.querySelector('#func').value,
 						document.querySelector('#a').value,
 						document.querySelector('#b').value
 					);
+					//Выводим площадь криволинейной трапеции
 					return result.innerHTML = Algebrite.defint(func, 'x', b, a);
 				}
 
 				//Игра 1
 				document.querySelector('#getResultGame').onclick = () => {
+					//Получаем значения из полей ввода
 					let a = document.querySelector('#aGame').value;
 					let b = document.querySelector('#bGame').value;
 					let func = document.querySelector('#funcGame').value;
+					// Ссылка на результирующий тег вывода
 					let result = document.querySelector('#_resultGame');
+					//Проверка на пустые значения
 					if (func === '') {
 						return result.innerHTML = 'Вы не ввели функцию';
 					}
@@ -563,48 +633,62 @@
 					if (a > b) {
 						return result.innerHTML = 'Вы перепутали границы';
 					}
+					//Строим криволинейную трапецию на плоскости
 					plot(
 						'plotGame',
 						func,
 						a,
 						b
 					);
+					//Записываем результат площади в переменную для последущего сравнения
 					resultGame = Algebrite.defint(func, 'x', a, b);
 				}
+				//Проверим, угадали ли мы площадь
 				document.querySelector('#check').onclick = () => {
+					//Сравнение результат посчитанной программой и результатом пользователя
 					let check = 
 						Algebrite.abs(
 							Algebrite.run(
 								`${document.querySelector("#inputGame").value}-${resultGame.toString()}`
 							)
 						).toString();
+					//Если разница 0, значит площадь угадана
 					if (check == 0) {
 						return document.querySelector('#_resultGame').innerHTML = 'Вы угадали';
 					}
+					//Иначе пишем разницу по модулю
 					return document.querySelector('#_resultGame').innerHTML = 'Вы ошиблись на ' +  check;
 				}
 
 				//Построение графика
 				const plot = (place, expr, a, b) => {
+					//Компилируем выражения для отрисовки
 					const exprCompile = math.compile(expr);
 					const aCompile = math.compile(a);
 					const bCompile = math.compile(b);
+					//Создаем массив разбиения с шагом 5 тысячных
 					const xValues = math.range(+a, +b+.05, .05).toArray();
+					//Получаем значение функции в каждой точке разбиения
 					const yValues = xValues.map(
 						x => {
 							return exprCompile.evaluate({x});
 						}
 					);
+					//Для правой и левой границы строим отрезок по 2 точкам
+					//так как граница строго вертикальная, то абциссы будут одинаковыми
 					const xValuesA = [a,a];
 					const xValuesB = [b,b];
+					//а значение функции в первой точке всегда 0, а второе значение в этой точке
 					const yValuesA = [0,exprCompile.evaluate({x:a})];
 					const yValuesB = [0,exprCompile.evaluate({x:b})];
+					//Строим графики по отдельности, при этом делаем заполнение от нуля до кривой
 					const plot1 = {
 						x: xValues,
 						y: yValues,
 						fill: 'tozeroy',
 						type: 'scatter',
 					}
+					//Вертикальные границы
 					const plot2 = {
 						x: xValuesA,
 						y: yValuesA,
@@ -615,6 +699,7 @@
 						y: yValuesB,
 						type: 'line',
 					}
+					//Собираем графики и выводим на страницу
 					Plotly.newPlot(place, [plot1, plot2, plot3]);
 				}
 
@@ -634,7 +719,8 @@
 					'1/cos(x)^2',
 					'1/sin(x)^2'
 				];
-
+				//В цикле пересобираем таблицу, где первый элемент это текущая функция в latex,
+				//где второй элемент это интеграл в латехе
 				for (let i in integralList) {
 					integralList[i] = [
 						'\\int ' + Algebrite.run(`printlatex(${integralList[i]})`)+' dx',
@@ -644,26 +730,35 @@
 				
 				//Таблица интегралов
 				const integralTable = (func) => {
+					//Предварительно сохраним заметки
 					let note = document.querySelector('#integral-table .notes').innerHTML;
-					let slide;
+					let slide; //Создаем переменую слайда
+					//Обходим все функции
 					for (let i in func) {
+						//На странице не более 6 интегралов
 						if (i%7 === 0) {
+							//Создаем новый слайд внутри текущего
 							slide = document.createElement('section');
+							//Костыль, чтобы слайд показался в момент рендера
 							if (i == 0) {
 								slide.className = 'present';
 							} else {
 								slide.classList = 'future';
 							}
+							//Добавим заголовок
 							slide.innerHTML = '<h3>Таблица интегралов</h3>';
 						}
+						//Записываем результат каждого интеграла с помощью катеха
 						slide.innerHTML += '<p>'+katex.renderToString(func[i][0])+' = '+
 							katex.renderToString(func[i][1])+'+C</p>';
+						//Через каждые 6 слайдов создаем новый слайд
 						if (i%7 === 6 || func.length - i === 1) {
 							slide.innerHTML += `<aside class="notes">${note}</aside>`;
 							document.querySelector('#integral-table').appendChild(slide);
 						}
 					}
 				}
+				//Вызываем функцию построения таблицы интегралов
 				integralTable(integralList);
 
 				//Матрица котов
@@ -672,6 +767,7 @@
 					'1.png',
 					'2.png',
 					'2.png',
+					'3.png',
 					'3.png',
 					'4.png',
 					'4.png',
@@ -684,30 +780,47 @@
 					'8.png',
 					'8.png',
 				];
+				//Счет
 				let score = [0,0];
+				//Текущий игрок
 				let who = 0;
+				//Оператор контроля начала игры
 				let start = false;
+				//Переменная последнего хода
 				let lastValue = undefined;
 
+				//16 ячеек игрового поля
 				let tds = document.querySelectorAll('#findCats td');
+				//Обходим в цикле все ячейки. Заполняем их изображением рубашек
+				//Переменная i нужна для более удобного доступа к ячейке
 				let i = 0;
 				for (let td of tds) {
 					td.innerHTML = `<img data-active="0" data-id="${i++}"
 						width="80px" height="60px" data-cats="" 
 						src="img/0.jpg">`;
+					//на каждое изображение с помощью firstChild вешаем событие клика
 					td.firstChild.onclick = e => {
+						//есл кликнули до начала игры, то оставляем карты на месте
 						if (!start){
 							return;
 						}
+						//если она уже перевернута, то считаем, что клика не было
 						if (e.target.dataset.active === '1') {
 							return;
 						}
+						//если переменная lastValue 
 						if (lastValue !== undefined) {
+							//если значение data-cats текущей и предыдущей карты равны, то мы нашли пару
 							if (lastValue.dataset.cats === e.target.dataset.cats) {
+								//Увеличиваем очки на 1
 								score[who] += 1;
+								//Записываем результат в таблицу
 								document.querySelector('#score2'+who).innerHTML = score[who];
+								//Обнуляем переменную последнего хода
 								lastValue = undefined;
+								//Если сумма очков двух игроков равна 8, то игра закончилась
 								if (score[0]+score[1] === 8) {
+									//У кого очков больше, тот и победил, или ничья, если очки равны
 									let winner = '';
 									if (score[0] > score[1]) {
 										winner = "Выйграл первый игрок";
@@ -716,15 +829,21 @@
 									} else {
 										winner = "Ничья";
 									}
+									//Пишем победителя в таблицу, скрываем таблицу результата
+									// и возвращаем кнопку начала игры
 									document.querySelector('#winner2').innerHTML = winner;
 									document.querySelector('#winner2').style.display = "block";
 									document.querySelector('#scoreboard2').style.display = 'none';
 									document.querySelector('#startGame2').style.display = 'inline';
+									//Переводим оператором начала игры в положение ожидания начала игры
 									start = false;
 								}
 							} else {
+								//в случае если коты оказались разными, то меняем игрока
+								// в переменой и таблице
 								who = who === 1 ? 0 : 1;
 								document.querySelector('#who2').innerHTML = who + 1;
+								//Через секунду возвращаем обе карточки в исходное положение 
 								setTimeout (
 									() => {
 										let dataId = document.querySelector(`[data-id="${e.target.dataset.id}"]`);
@@ -733,29 +852,40 @@
 										let dataId2 = document.querySelector(`[data-id="${lastValue.dataset.id}"]`);
 										dataId2.src = "img/0.jpg";
 										dataId2.dataset.active = 0;
-
+										///
+										lastValue = undefined;
 									}, 1000
 								);
 							}
 						} else {
+							//записываем первый ход игрока в переменную
 							lastValue = e.target;
 						}
+						//Переворачиваем карту, подставляя значение из data-cats
 						document.querySelector(`[data-id="${e.target.dataset.id}"]`).src = 
 							'img/'+e.target.dataset.cats;
 						document.querySelector(`[data-id="${e.target.dataset.id}"]`)
 							.dataset.active = "1";
-						
 					}
 				}
+
+				//Событие при клике на кнопку старт игры
 				document.querySelector("#startGame2").onclick = () => {
+					//Скрываем кнопку начала игры, скрываем предыдущего победителя
+					//Отображаем игровую таблицу
 					document.querySelector('#startGame2').style.display = 'none';
 					document.querySelector('#winner2').style.display = 'none';
 					document.querySelector('#scoreboard2').style.display = 'table';
+					//переводим оператор старта в положение true 
 					start = true;
+					//обнуляем счет
 					score = [0, 0];
+					//Обнуляем результат в таблице
 					document.querySelector('#score20').innerHTML = "0";
 					document.querySelector('#score21').innerHTML = "0";
+					//перемешиваем наших котов
 					findCatsName = _.shuffle(findCatsName);
+					console.log(findCatsName);
 					for (let i in findCatsName) {
 						let dataId = document.querySelector(`[data-id="${i}"]`);
 						dataId.src= "img/0.jpg";
@@ -765,37 +895,23 @@
 					}
 				}
 			}
-
 		</script>
-
 		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
 			Reveal.initialize({
-				hash: true,
-				center: false,
-				slideNumber: true,
+				hash: true, //При обновлении страницы, будем возвращаться на туже страницу
+				center: false, //отменим вертикальное центрирование
+				slideNumber: true, //Покажем номер слайды
 				math: {
-					notificationsEnabled: true,
+					notificationsEnabled: true, //включаем отображение ошибок katex
 				},
+				//Подключаем LaTeX рендер
 				dependencies: [
 					{
-						src: 'plugin/math-katex/math-katex.js', 
+						src: 'plugin/math-katex/math-katex.js', //Подключаем рендер katex
 						async: true,
-						callback: () => {
-							// // solve problem with katex 
-							// let section = document.querySelectorAll('section script');
-							// 	section.forEach( (item, i) => {
-							// 		section[i].innerHTML = section[i].innerHTML
-							// 			.replace(/\\/g,'\\\\')
-							// 			.replace(/_/g,'\\_')
-							// 			.replace(/\{/g,'\\\{')
-							// 			.replace(/\}/g,'\\\}');
-							// });
-						},
+						callback: () => {},
 					}],
-				// Learn about plugins: https://revealjs.com/plugins/
+				//Рендер Маркдауна, Подвестка синтаксиса, Заметки
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
 		</script>
