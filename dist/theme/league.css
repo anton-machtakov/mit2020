@@ -351,3 +351,10 @@
     #findCats td {
       cursor: pointer;
     }
+
+    #findIntegrals [data-int] {
+      min-width: 50px;
+      min-height: 30px;
+      text-align: center;
+      cursor: pointer;
+    }

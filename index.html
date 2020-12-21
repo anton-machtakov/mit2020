@@ -113,7 +113,7 @@
 				
 				<!-- Используем идентификатор для генерации таблицы -->
 				<!-- На этом слайде не используем markdown, потому что слайд будет генерироваться с помощью JS -->
-				<section id="integral-table">
+				<section id="integral-table" data-menu-title="Таблица интегралов">
 					<aside class="notes">
 						Таблица интегралов
 					</aside>
@@ -125,10 +125,10 @@
 						-------------------------
 
 						1. Разобъем промежуток точками 
-						$x_0 = a, x_1, x_2, x_3, \cdots, x_k, x_{k+1}, \cdots, x_n=b$
+						$x_0 = a, x_1, x_2, x_3, \ldots, x_k, x_{k+1}, \ldots, x_n=b$
 						Введем следующее обозначение: $\Delta x_k = x_{k+1}-x_k$ - длина 
 						участка разбиения.
-						$\lambda = \sup \{ \Delta x_k \}$ - диаметр разбиения (наибольший
+						$\lambda = \sup \lbrace \Delta x_k \rbrace$ - диаметр разбиения (наибольший
 						из всех длин участков разбиения)
 					</script>
 				</section>
@@ -228,7 +228,7 @@
 						на отрезке $[a,b]$, а $F(x)$ её первообразная,
 						тогда имеем равенство:
 						$$
-							\int_a^bf(x)dx = F(b) - F(a)
+							\int_a^bf(x)dx = F(x) \bigg|_a^b = F(b) - F(a)
 						$$
 					</script>
 				</section>
@@ -239,7 +239,8 @@
 						-------------------------
 
 						$$
-							\int_1^2x^2dx = \dfrac{2^3}{3} - \dfrac{1^3}{3} =
+							\int_1^2x^2dx = \dfrac{x^3}{3} \bigg|_1^2 = 
+							\dfrac{2^3}{3} - \dfrac{1^3}{3} =
 							\dfrac{8}{3} - \dfrac{1}{3} = \dfrac{7}{3}
 						$$
 					</script>
@@ -521,6 +522,27 @@
 						</tr>
 					</table>
 				</section>
+
+				<section data-background-size="contain" data-background="img/img1.jpg"
+					data-menu-title="Привел уравнение к интегральному виду">
+				</section>
+
+				<section data-background-size="contain" data-background="img/img2.jpg"
+					data-menu-title="А ты умеешь решать определенный интегралы">
+				</section>
+
+				<section data-background-size="contain" data-background="img/img3.jpg"
+					data-menu-title="Интеграл коровы">
+				</section>
+
+				<section data-background-size="contain" data-background="img/img4.jpg"
+					data-menu-title="Интегал апельсина">
+				</section>
+
+				<section class="center" data-menu-title="Заключительный слайд">
+					Спасибо за внимание
+				</section>
+
 			</div>
 		</div>
 		
@@ -738,7 +760,7 @@
 					//Обходим все функции
 					for (let i in func) {
 						//На странице не более 6 интегралов
-						if (i%7 === 0) {
+						if (i%6 === 0) {
 							//Создаем новый слайд внутри текущего
 							slide = document.createElement('section');
 							//Костыль, чтобы слайд показался в момент рендера
@@ -754,7 +776,7 @@
 						slide.innerHTML += '<p>'+katex.renderToString(func[i][0])+' = '+
 							katex.renderToString(func[i][1])+'+C</p>';
 						//Через каждые 6 слайдов создаем новый слайд
-						if (i%7 === 6 || func.length - i === 1) {
+						if (i%6 === 5 || func.length - i === 1) {
 							slide.innerHTML += `<aside class="notes">${note}</aside>`;
 							document.querySelector('#integral-table').appendChild(slide);
 						}
@@ -893,7 +915,7 @@
 					//на каждое изображение с помощью firstChild вешаем событие клика
 					td.firstChild.onclick = e => {
 						//есл кликнули до начала игры, то оставляем карты на месте
-						if (!start){
+						if (!start2){
 							return;
 						}
 						//если она уже перевернута, то считаем, что клика не было
@@ -903,11 +925,11 @@
 						//если переменная lastValue 
 						if (lastValue2 !== undefined) {
 							let check = false;
-							for (let arr of interalList) {
+							for (let arr of integralList) {
 								if (_.intersection([
 									lastValue2.dataset.int,
 									e.target.dataset.int,
-								]).length == 2) {
+								], arr).length == 2) {
 									check = true;
 									break;
 								}
@@ -948,10 +970,10 @@
 								//Через секунду возвращаем обе карточки в исходное положение 
 								setTimeout (
 									() => {
-										let dataId = document.querySelector(`[data-idi="${e.target.dataset.id}"]`);
+										let dataId = document.querySelector(`[data-idi="${e.target.dataset.idi}"]`);
 										dataId.innerHTML = "&nbsp;&nbsp;&#8747;&nbsp;&nbsp;";
 										dataId.dataset.active = 0;
-										let dataId2 = document.querySelector(`[data-idi="${lastValue.dataset.id}"]`);
+										let dataId2 = document.querySelector(`[data-idi="${lastValue2.dataset.idi}"]`);
 										dataId2.innerHTML = "&nbsp;&nbsp;&#8747;&nbsp;&nbsp;";
 										dataId2.dataset.active = 0;
 										///
@@ -1014,13 +1036,13 @@
 					document.querySelector('#score30').innerHTML = "0";
 					document.querySelector('#score31').innerHTML = "0";
 					//перемешиваем наших котов
-					let interalList3 = _.flatten(integralList2);
-					interalList3 = _.shuffle(interalList3);
-					for (let j in interalList3) {
+					let integralList3 = _.flatten(integralList2);
+					integralList3 = _.shuffle(integralList3);
+					for (let j in integralList3) {
 						let dataId = document.querySelector(`[data-idi="${j}"]`);
 						dataId.innerHTML = '&nbsp;&nbsp;&#8747;&nbsp;&nbsp;'; 
 						dataId.dataset.active = "0";
-						dataId.dataset.int = interalList3[j];
+						dataId.dataset.int = integralList3[j];
 					}
 				}
 			}
@@ -1033,12 +1055,21 @@
 				math: {
 					notificationsEnabled: true, //включаем отображение ошибок katex
 				},
+				menu: {
+					number: true,
+					markers: true,
+					keyboard: true,
+
+				},
 				//Подключаем LaTeX рендер
 				dependencies: [
 					{
 						src: 'plugin/math-katex/math-katex.js', //Подключаем рендер katex
 						async: true,
 						callback: () => {},
+					}, {
+						src: 'plugin/menu/menu.js',
+						async: true,
 					}],
 				//Рендер Маркдауна, Подвестка синтаксиса, Заметки
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
