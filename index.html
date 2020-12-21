@@ -727,6 +727,8 @@
 						Algebrite.integral(integralList[i]).toLatexString()
 					];
 				}
+				integralList = _.shuffle(integralList);
+				let integralList2 = integralList.slice(0,8);
 				
 				//Таблица интегралов
 				const integralTable = (func) => {
@@ -780,6 +782,7 @@
 					'8.png',
 					'8.png',
 				];
+				
 				//Счет
 				let score = [0,0];
 				//Текущий игрок
@@ -869,6 +872,107 @@
 					}
 				}
 
+				//3 игра
+				//Счет
+				let score2 = [0,0];
+				//Текущий игрок
+				let who2 = 0;
+				//Оператор контроля начала игры
+				let start2 = false;
+				//Переменная последнего хода
+				let lastValue2 = undefined;
+
+				//16 ячеек игрового поля
+				let tds2 = document.querySelectorAll('#findIntegrals td');
+				//Обходим в цикле все ячейки. Заполняем их изображением рубашек
+				//Переменная i нужна для более удобного доступа к ячейке
+				let j = 0;
+				for (let td of tds2) {
+					td.innerHTML = `<div data-active="0" data-idi="${j++}"
+						data-int="">&#8747;</div>`;
+					//на каждое изображение с помощью firstChild вешаем событие клика
+					td.firstChild.onclick = e => {
+						//есл кликнули до начала игры, то оставляем карты на месте
+						if (!start){
+							return;
+						}
+						//если она уже перевернута, то считаем, что клика не было
+						if (e.target.dataset.active === '1') {
+							return;
+						}
+						//если переменная lastValue 
+						if (lastValue2 !== undefined) {
+							let check = false;
+							for (let arr of interalList) {
+								if (_.intersection([
+									lastValue2.dataset.int,
+									e.target.dataset.int,
+								]).length == 2) {
+									check = true;
+									break;
+								}
+							}
+							//если значение data-cats текущей и предыдущей карты равны, то мы нашли пару
+							if (check === true) {
+								//Увеличиваем очки на 1
+								score2[who2] += 1;
+								//Записываем результат в таблицу
+								document.querySelector('#score3'+who2).innerHTML = score2[who2];
+								//Обнуляем переменную последнего хода
+								lastValue2 = undefined;
+								//Если сумма очков двух игроков равна 8, то игра закончилась
+								if (score2[0]+score2[1] === 8) {
+									//У кого очков больше, тот и победил, или ничья, если очки равны
+									let winner = '';
+									if (score2[0] > score2[1]) {
+										winner = "Выйграл первый игрок";
+									} else if (score2[0] < score2[1]) {
+										winner = "Выйграл второй игрок"
+									} else {
+										winner = "Ничья";
+									}
+									//Пишем победителя в таблицу, скрываем таблицу результата
+									// и возвращаем кнопку начала игры
+									document.querySelector('#winner3').innerHTML = winner;
+									document.querySelector('#winner3').style.display = "block";
+									document.querySelector('#scoreboard3').style.display = 'none';
+									document.querySelector('#startGame3').style.display = 'inline';
+									//Переводим оператором начала игры в положение ожидания начала игры
+									start2 = false;
+								}
+							} else {
+								//в случае если коты оказались разными, то меняем игрока
+								// в переменой и таблице
+								who2 = who2 === 1 ? 0 : 1;
+								document.querySelector('#who3').innerHTML = who2 + 1;
+								//Через секунду возвращаем обе карточки в исходное положение 
+								setTimeout (
+									() => {
+										let dataId = document.querySelector(`[data-idi="${e.target.dataset.id}"]`);
+										dataId.innerHTML = "&nbsp;&nbsp;&#8747;&nbsp;&nbsp;";
+										dataId.dataset.active = 0;
+										let dataId2 = document.querySelector(`[data-idi="${lastValue.dataset.id}"]`);
+										dataId2.innerHTML = "&nbsp;&nbsp;&#8747;&nbsp;&nbsp;";
+										dataId2.dataset.active = 0;
+										///
+										lastValue2 = undefined;
+									}, 1000
+								);
+							}
+						} else {
+							//записываем первый ход игрока в переменную
+							lastValue2 = e.target;
+						}
+						//Переворачиваем карту, подставляя значение из data-cats
+						katex.render(
+							e.target.dataset.int,
+							document.querySelector(`[data-idi="${e.target.dataset.idi}"]`)
+						);
+						document.querySelector(`[data-idi="${e.target.dataset.idi}"]`)
+							.dataset.active = "1";
+					}
+				}
+
 				//Событие при клике на кнопку старт игры
 				document.querySelector("#startGame2").onclick = () => {
 					//Скрываем кнопку начала игры, скрываем предыдущего победителя
@@ -892,6 +996,31 @@
 						/// dataId.active = "0"; 
 						dataId.dataset.active = "0";
 						dataId.dataset.cats = findCatsName[i];
+					}
+				}
+
+				//Событие при клике на кнопку старт игры 3
+				document.querySelector("#startGame3").onclick = () => {
+					//Скрываем кнопку начала игры, скрываем предыдущего победителя
+					//Отображаем игровую таблицу
+					document.querySelector('#startGame3').style.display = 'none';
+					document.querySelector('#winner3').style.display = 'none';
+					document.querySelector('#scoreboard3').style.display = 'table';
+					//переводим оператор старта в положение true 
+					start2 = true;
+					//обнуляем счет
+					score2 = [0, 0];
+					//Обнуляем результат в таблице
+					document.querySelector('#score30').innerHTML = "0";
+					document.querySelector('#score31').innerHTML = "0";
+					//перемешиваем наших котов
+					let interalList3 = _.flatten(integralList2);
+					interalList3 = _.shuffle(interalList3);
+					for (let j in interalList3) {
+						let dataId = document.querySelector(`[data-idi="${j}"]`);
+						dataId.innerHTML = '&nbsp;&nbsp;&#8747;&nbsp;&nbsp;'; 
+						dataId.dataset.active = "0";
+						dataId.dataset.int = interalList3[j];
 					}
 				}
 			}
